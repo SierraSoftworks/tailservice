@@ -26,7 +26,8 @@ func (l *Listener) listenHttp(ctx context.Context, srv *tsnet.Server, listener n
 	}
 
 	http.Serve(listener, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		resp, err := httpClient.Do(r.WithContext(ctx))
+		req := r.Clone(ctx)
+		resp, err := httpClient.Do(req)
 
 		if err != nil {
 			herr := humane.Wrap(
