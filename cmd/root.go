@@ -10,12 +10,16 @@ import (
 
 var config proxy.Config
 
+var Version = "dev"
+
 var rootCmd = &cobra.Command{
 	Use:   "tailservice",
 	Short: "Easily expose services on your Tailscale network.",
 	Long: `Tailservice uses the tsnet library to expose a dedicated service on your
 	Tailscale network as its own individual node. This allows you to easily access
 	it using the corresponding service name (if you have MagicDNS enabled).`,
+	Version: Version,
+	Example: `tailservice --name my-service --tcp 80:8080 --udp 53:8.8.4.4:53 --tls 443:example.com:80 --tls 8443:https://example.com`,
 	Run: func(cmd *cobra.Command, args []string) {
 		listeners := []proxy.Listener{}
 

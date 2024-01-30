@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [linux, darwin, windows]
+        arch: [amd64, arm64]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.21
+      - name: Build
+        run: |
+          go build -v -o tailservice-${{ matrix.os }}-${{ matrix.arch }} -ldflags="-X 'cmd.Version=${{ github.event.release.tag_name }}'" main.go
+        env:
+          GOOS: ${{ matrix.os }}
+          GOARCH: ${{ matrix.arch }}
+
+      - name: Upload Release Assets
+        uses: SierraSoftworks/gh-release@v1.0.7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          overwrite: true
+          files: |
+            tailservice-${{ matrix.os }}-${{ matrix.arch }}
