@@ -18,15 +18,31 @@ func (l *Listener) listenHttp(ctx context.Context, srv *tsnet.Server, listener n
 	httpClient := http.DefaultClient
 
 	// Detect if we should use the tailscale HTTP client for these requests
-	uri, err := url.Parse(l.Target)
+	targetUri, err := url.Parse(l.Target)
 	if err != nil {
-		if isTailscaleHost(uri.Hostname()) {
+		if isTailscaleHost(targetUri.Hostname()) {
 			httpClient = srv.HTTPClient()
 		}
 	}
 
 	http.Serve(listener, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		req := r.Clone(ctx)
+		url, _ := url.Parse(r.URL.String())
+		url.Host = targetUri.Host
+		url.Scheme = targetUri.Scheme
+
+		req, err := http.NewRequestWithContext(ctx, r.Method, url.String(), r.Body)
+		if err != nil {
+			herr := humane.Wrap(
+				err,
+				"Could not contruct a valid request to the target service.",
+				"Make sure that you have provided a valid service URL in your listener configuration.",
+			)
+
+			log.Error().Err(err).Msg(herr.Display())
+			w.WriteHeader(http.StatusBadGateway)
+			return
+		}
+
 		resp, err := httpClient.Do(req)
 
 		if err != nil {
