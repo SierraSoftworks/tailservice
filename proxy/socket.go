@@ -39,7 +39,15 @@ func (l *Listener) handleConnection(ctx context.Context, srv *tsnet.Server, conn
 
 	log.Info().Str("remote", conn.RemoteAddr().String()).Msg("New connection")
 
-	remote, err := srv.Dial(ctx, l.Proto, l.Target)
+	var remote net.Conn
+	var err error
+
+	if isTailscaleHost(l.Target) {
+		remote, err = srv.Dial(ctx, l.Proto, l.Target)
+	} else {
+		remote, err = net.Dial(l.Proto, l.Target)
+	}
+
 	if err != nil {
 		err = humane.Wrap(
 			err,

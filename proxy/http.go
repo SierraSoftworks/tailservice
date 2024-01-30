@@ -5,6 +5,7 @@ import (
 	"io"
 	"net"
 	"net/http"
+	"net/url"
 
 	"github.com/rs/zerolog/log"
 	humane "github.com/sierrasoftworks/humane-errors-go"
@@ -12,13 +13,21 @@ import (
 )
 
 func (l *Listener) listenHttp(ctx context.Context, srv *tsnet.Server, listener net.Listener) {
-	httpClient := srv.HTTPClient()
+	httpClient := http.DefaultClient
+
+	// Detect if we should use the tailscale HTTP client for these requests
+	uri, err := url.Parse(l.Target)
+	if err != nil {
+		if isTailscaleHost(uri.Hostname()) {
+			httpClient = srv.HTTPClient()
+		}
+	}
 
 	http.Serve(listener, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		resp, err := httpClient.Do(r.WithContext(ctx))
 
 		if err != nil {
-			err = humane.Wrap(
+			herr := humane.Wrap(
 				err,
 				"Could not forward the request to the target service.",
 				"Make sure that the target service is still running and reachable.",
@@ -26,7 +35,7 @@ func (l *Listener) listenHttp(ctx context.Context, srv *tsnet.Server, listener n
 				"Make sure that you've specified the correct target service in your listener configuration.",
 			)
 
-			log.Error().Err(err).Msg("Could not forward request")
+			log.Error().Err(err).Msg(herr.Display())
 			w.WriteHeader(http.StatusBadGateway)
 			return
 		}
