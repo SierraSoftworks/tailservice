@@ -1,5 +1,5 @@
 # Tail Service
-**Easily expose services on your [Tailnet](https://tailscale.com/) network.**
+**Easily expose services on your [Tailscale](https://tailscale.com/) network.**
 
 This project provides an extremely easy to use proxy for exposing services on your
 [Tailscale](https://tailscale.com/) network under their own MagicDNS name. It is
