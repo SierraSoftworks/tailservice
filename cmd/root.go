@@ -61,6 +61,7 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.Flags().BoolVar(&config.Debug, "ts-debug", false, "Enable debug logging of all Tailscale operations.")
 	rootCmd.Flags().StringVar(&config.Hostname, "name", "", "Name of the service to expose on your tailnet.")
 	rootCmd.Flags().BoolVar(&config.Ephemeral, "ephemeral", false, "Create the service ephemerally (remove it when the app closes).")
 	rootCmd.Flags().StringVar(&config.DataDir, "data-dir", "", "Directory to store the service's connection data.")

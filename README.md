@@ -74,3 +74,13 @@ or if the config file is deleted).
 # Configure your Tailscale authentication key
 export TS_AUTHKEY="tskey-1234567890abcdef"
 ```
+
+### Enabling Tailscale Debug Logging
+If you're having trouble getting `tailservice` to work, you can enable debug
+logging by passing the `--ts-debug` flag. This will cause `tailservice` to
+print out the raw Tailscale logs to the console, which may help you to
+diagnose the problem.
+
+```bash
+tailservice --name my-service --tcp 80:80 --ts-debug
+```

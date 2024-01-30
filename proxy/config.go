@@ -64,7 +64,9 @@ func (c *Config) getServer() tsnet.Server {
 		Ephemeral: c.Ephemeral,
 		Dir:       c.resolveDataDir(),
 		Logf: func(f string, args ...any) {
-			if c.Debug {
+			if !isDebugLog(f, args...) {
+				log.Info().Msgf(f, args...)
+			} else if c.Debug {
 				log.Debug().Msgf(f, args...)
 			}
 		},

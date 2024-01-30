@@ -1,0 +1,13 @@
+[Unit]
+Description=Starts the tailservice agent to host a service on your Tailnet
+After=multi-user.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=nobody
+WorkingDirectory=/opt/local/tailservice
+EnvironmentFile=/opt/local/tailservice/tailservice.env
+ExecStart=/opt/local/bin/tailservice $TAILSERVICE_ARGS
