@@ -13,6 +13,8 @@ import (
 )
 
 func (l *Listener) listenHttp(ctx context.Context, srv *tsnet.Server, listener net.Listener) {
+	defer listener.Close()
+
 	httpClient := http.DefaultClient
 
 	// Detect if we should use the tailscale HTTP client for these requests
@@ -49,16 +51,16 @@ func (l *Listener) listenHttp(ctx context.Context, srv *tsnet.Server, listener n
 		w.WriteHeader(resp.StatusCode)
 		_, err = io.Copy(w, resp.Body)
 		if err != nil {
-			err = humane.Wrap(
+			herr := humane.Wrap(
 				err,
 				"Could not forward the response from the target service.",
 				"Make sure that the target service is still running and reachable.",
 			)
 
-			log.Error().Err(err).Msg("Could not forward response")
+			log.Error().Err(err).Msg(herr.Display())
+		} else {
+			log.Debug().Str("method", r.Method).Str("path", r.URL.Path).Int("status", resp.StatusCode).Msg("Forwarded request")
 		}
-
-		log.Debug().Str("method", r.Method).Str("path", r.URL.Path).Int("status", resp.StatusCode).Msg("Forwarded request")
 
 	}))
 }

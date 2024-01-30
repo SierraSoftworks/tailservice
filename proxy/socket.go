@@ -13,6 +13,7 @@ import (
 )
 
 func (l *Listener) listenSocket(ctx context.Context, srv *tsnet.Server, listener net.Listener) {
+	defer listener.Close()
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
@@ -20,13 +21,13 @@ func (l *Listener) listenSocket(ctx context.Context, srv *tsnet.Server, listener
 				return
 			}
 
-			err = humane.Wrap(
+			herr := humane.Wrap(
 				err,
 				fmt.Sprintf("Could not accept a new connection on the %s:%d listener.", l.Proto, l.Port),
 				"Make sure that your client is still connected to the Tailnet and re-authenticate if necessary.",
 			)
 
-			log.Warn().Err(err).Msg("Could not accept connection")
+			log.Warn().Err(err).Msg(herr.Display())
 			continue
 		}
 
@@ -37,7 +38,7 @@ func (l *Listener) listenSocket(ctx context.Context, srv *tsnet.Server, listener
 func (l *Listener) handleConnection(ctx context.Context, srv *tsnet.Server, conn net.Conn) {
 	defer conn.Close()
 
-	log.Info().Str("remote", conn.RemoteAddr().String()).Msg("New connection")
+	log.Debug().Str("remote", conn.RemoteAddr().String()).Msg("New connection")
 
 	var remote net.Conn
 	var err error
@@ -62,8 +63,20 @@ func (l *Listener) handleConnection(ctx context.Context, srv *tsnet.Server, conn
 
 	defer remote.Close()
 
-	go io.Copy(remote, conn)
-	go io.Copy(conn, remote)
+	close := make(chan struct{})
 
-	<-ctx.Done()
+	go func() {
+		io.Copy(remote, conn)
+		close <- struct{}{}
+	}()
+	go func() {
+		io.Copy(conn, remote)
+		close <- struct{}{}
+	}()
+
+	select {
+	case <-ctx.Done():
+	case <-close:
+		log.Debug().Str("remote", conn.RemoteAddr().String()).Msg("Connection closed")
+	}
 }
