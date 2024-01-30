@@ -1,9 +1,11 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/rs/zerolog/log"
+	"github.com/sierrasoftworks/humane-errors-go"
 	"github.com/sierrasoftworks/tailservice/proxy"
 	"github.com/spf13/cobra"
 )
@@ -52,6 +54,7 @@ var rootCmd = &cobra.Command{
 
 		err = config.Run(cmd.Context())
 		if err != nil {
+			fmt.Println(humane.Wrap(err, "The service exited unexpectedly."))
 			os.Exit(1)
 		}
 	},
