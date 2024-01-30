@@ -43,6 +43,12 @@ func (l *Listener) listenHttp(ctx context.Context, srv *tsnet.Server, listener n
 			return
 		}
 
+		for k, v := range r.Header {
+			req.Header[k] = v
+		}
+
+		req.Header["Host"] = []string{targetUri.Host}
+
 		resp, err := httpClient.Do(req)
 
 		if err != nil {
