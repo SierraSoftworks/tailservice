@@ -1,0 +1,7 @@
+version: 2
+updates:
+  - directory: /
+    package-ecosystem: gomod 
+    rebase-strategy: auto
+    schedule:
+      interval: daily
