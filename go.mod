@@ -56,7 +56,7 @@ require (
 	github.com/pierrec/lz4/v4 v4.1.18 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/rs/zerolog v1.31.0
+	github.com/rs/zerolog v1.32.0
 	github.com/safchain/ethtool v0.3.0 // indirect
 	github.com/sierrasoftworks/humane-errors-go v0.0.0-20230530140120-66beb42cef4d
 	github.com/spf13/cobra v1.8.0
