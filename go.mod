@@ -8,6 +8,8 @@ require github.com/stretchr/testify v1.9.0
 
 require (
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.10.4 // indirect
+	github.com/bits-and-blooms/bitset v1.13.0 // indirect
+	github.com/gaissmai/bart v0.4.1 // indirect
 	github.com/tailscale/peercred v0.0.0-20240214030740-b535050b2aa4 // indirect
 )
 
@@ -97,5 +99,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gvisor.dev/gvisor v0.0.0-20240306221502-ee1e1f6070e3 // indirect
 	nhooyr.io/websocket v1.8.10 // indirect
-	tailscale.com v1.62.1
+	tailscale.com v1.64.0
 )
