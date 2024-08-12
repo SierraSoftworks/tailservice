@@ -1,7 +1,19 @@
 version: 2
 updates:
   - directory: /
-    package-ecosystem: gomod 
+    package-ecosystem: gomod
+    rebase-strategy: auto
+    schedule:
+      interval: daily
+
+  - directory: /
+    package-ecosystem: docker
+    rebase-strategy: auto
+    schedule:
+      interval: daily
+
+  - directory: /
+    package-ecosystem: github-actions
     rebase-strategy: auto
     schedule:
       interval: daily
