@@ -11,7 +11,7 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-w -s
 
 FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.20.2
 
-RUN adduser -D -u 1000 tailservice -h /app/data
+RUN mkdir -p /app/data/ && adduser -D -u 1000 tailservice -h /app/data
 VOLUME /app/data
 
 WORKDIR /app/
