@@ -13,6 +13,7 @@ FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.20.2
 
 RUN mkdir -p /app/data/ && adduser -D -u 1000 tailservice -h /app/data
 VOLUME /app/data
+USER nonroot
 
 WORKDIR /app/
 COPY --from=builder /app/tailservice /app/tailservice
