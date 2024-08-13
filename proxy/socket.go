@@ -77,6 +77,10 @@ func (l *Listener) handleConnection(ctx context.Context, srv *tsnet.Server, conn
 	select {
 	case <-ctx.Done():
 	case <-close:
-		log.Debug().Str("remote", conn.RemoteAddr().String()).Msg("Connection closed")
+		if addr := remote.RemoteAddr(); addr != nil {
+			log.Debug().Str("remote", addr.String()).Msg("Connection closed")
+		} else {
+			log.Debug().Msg("Connection closed")
+		}
 	}
 }
