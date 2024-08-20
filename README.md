@@ -33,7 +33,7 @@ have configured your Tailscale account to support HTTPS certificates).
 When specifying a port to expose, you first indicate the type of protocol
 you'd like to receive traffic on (e.g. `--tcp`, `--udp` or the special `--tls`
 variant), followed by the listener specification.
- 
+
 ```bash
 # Forwards raw TCP traffic from port 80 on the Tailnet service
 # to port 8080 on the local machine.
@@ -46,6 +46,18 @@ tailservice --name my-service --udp 53:8.8.4.4:53
 # Forwards TLS traffic from port 443 on the Tailnet service
 # to port 8080 on another Tailnet node.
 tailservice --name my-service --tls 443:example-node.tails-scales.ts.net:8080
+```
+
+### Exposing services using Funnel
+Tailscale's Funnel functionality allows you to expose tailnet services to the public
+internet, allowing clients without Tailscale installed to access the service. To enable
+this functionality, you can use the `--funnel` flag when starting `tailservice` and
+configure a listener on port `443`, `8443` or `10000`.
+
+```bash
+# Forwards TLS traffic from port 443 on your funnel endpoint to
+# port 8080 on the local machine.
+tailservice --name my-service --tls 443:8080 --funnel
 ```
 
 ### Running in Ephemeral Mode

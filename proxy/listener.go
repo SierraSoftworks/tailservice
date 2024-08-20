@@ -60,11 +60,13 @@ func ParseListener(s, proto string, secure bool) (*Listener, error) {
 	}, nil
 }
 
-func (l *Listener) Start(ctx context.Context, srv *tsnet.Server) error {
+func (l *Listener) Start(ctx context.Context, srv *tsnet.Server, funnel bool) error {
 	var listener net.Listener
 	var err error
 
-	if l.Secure {
+	if funnel && (l.Port == 443 || l.Port == 8443 || l.Port == 10000) {
+		listener, err = srv.ListenFunnel(l.Proto, fmt.Sprintf(":%d", l.Port))
+	} else if l.Secure {
 		listener, err = srv.ListenTLS(l.Proto, fmt.Sprintf(":%d", l.Port))
 	} else {
 		listener, err = srv.Listen(l.Proto, fmt.Sprintf(":%d", l.Port))

@@ -71,6 +71,7 @@ func init() {
 	rootCmd.Flags().BoolVar(&config.Debug, "ts-debug", false, "Enable debug logging of all Tailscale operations.")
 	rootCmd.Flags().StringVar(&config.Hostname, "name", "", "Name of the service to expose on your tailnet.")
 	rootCmd.Flags().BoolVar(&config.Ephemeral, "ephemeral", false, "Create the service ephemerally (remove it when the app closes).")
+	rootCmd.Flags().BoolVar(&config.Funnel, "funnel", false, "Enable the Funnel proxy for this service when listening on ports 443/8443/10000.")
 	rootCmd.Flags().StringVar(&config.DataDir, "data-dir", "", "Directory to store the service's connection data.")
 	rootCmd.Flags().StringArray("tcp", []string{}, "TCP listeners to expose on the service.")
 	rootCmd.Flags().StringArray("tls", []string{}, "TLS listeners to expose on the service.")

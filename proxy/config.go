@@ -14,6 +14,7 @@ type Config struct {
 	Ephemeral bool
 	DataDir   string
 	Listeners []Listener
+	Funnel    bool
 	Debug     bool
 }
 
@@ -31,7 +32,7 @@ func (c *Config) Run(ctx context.Context) error {
 	log.Info().Str("hostname", status.Self.DNSName[:len(status.Self.DNSName)-1]).Msg("Server started successfully")
 
 	for _, listener := range c.Listeners {
-		err := listener.Start(ctx, &server)
+		err := listener.Start(ctx, &server, c.Funnel)
 		if err != nil {
 			log.Error().Err(err).Msg("Could not start listener")
 			return err
