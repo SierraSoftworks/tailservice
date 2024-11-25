@@ -1,9 +1,6 @@
 module github.com/sierrasoftworks/tailservice
 
 go 1.23
-
-toolchain go1.23.1
-
 require github.com/stretchr/testify v1.10.0
 
 require (
@@ -99,5 +96,5 @@ require (
 	golang.zx2c4.com/wireguard/windows v0.5.3 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gvisor.dev/gvisor v0.0.0-20240722211153-64c016c92987 // indirect
-	tailscale.com v1.74.1
+	tailscale.com v1.76.6
 )
