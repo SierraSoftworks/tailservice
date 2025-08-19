@@ -28,7 +28,7 @@ jobs:
           GOARCH: ${{ matrix.arch }}
 
       - name: Upload Release Assets
-        uses: SierraSoftworks/gh-releases@v1.0.7
+        uses: SierraSoftworks/gh-releases@v1.0.8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           overwrite: true
