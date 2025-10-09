@@ -9,7 +9,7 @@ WORKDIR /app/
 ADD . .
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags="-w -s" -o tailservice main.go
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.22.1
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.22.2
 
 RUN mkdir -p /app/data/ && adduser -D -u 1000 tailservice -h /app/data
 VOLUME /app/data
