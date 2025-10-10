@@ -36,7 +36,7 @@ func ParseListener(s, proto string, secure bool) (*Listener, error) {
 		)
 	}
 
-	port, err := strconv.ParseInt(parts[0], 10, 16)
+	port, err := strconv.ParseUint(parts[0], 10, 16)
 	if err != nil {
 		return nil, humane.Wrap(
 			err,
