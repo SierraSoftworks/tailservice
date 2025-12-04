@@ -40,7 +40,7 @@ require (
 	github.com/rs/zerolog v1.34.0
 	github.com/safchain/ethtool v0.3.0 // indirect
 	github.com/sierrasoftworks/humane-errors-go v0.0.0-20230530140120-66beb42cef4d
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.9 // indirect
 	github.com/tailscale/certstore v0.1.1-0.20231202035212-d3fa0460f47e // indirect
 	github.com/tailscale/go-winio v0.0.0-20231025203758-c4f33415bf55 // indirect
