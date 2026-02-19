@@ -14,6 +14,11 @@ jobs:
       matrix:
         os: [linux, darwin, windows]
         arch: [amd64, arm64, arm]
+        exclude:
+          - os: darwin
+            arch: arm
+          - os: windows
+            arch: arm
     steps:
       - uses: actions/checkout@v6
       - name: Set up Go
