@@ -13,7 +13,12 @@ jobs:
     strategy:
       matrix:
         os: [linux, darwin, windows]
-        arch: [amd64, arm64]
+        arch: [amd64, arm64, arm]
+        exclude:
+          - os: darwin
+            arch: arm
+          - os: windows
+            arch: arm
     steps:
       - uses: actions/checkout@v6
       - name: Set up Go
@@ -27,6 +32,7 @@ jobs:
         env:
           GOOS: ${{ matrix.os }}
           GOARCH: ${{ matrix.arch }}
+          GOARM: ${{ matrix.arch == 'arm' && '7' || '' }}
 
       - name: Upload Release Assets
         uses: SierraSoftworks/gh-releases@v1.0.8
