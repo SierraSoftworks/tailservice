@@ -35,7 +35,7 @@ jobs:
           GOARM: ${{ matrix.arch == 'arm' && '7' || '' }}
 
       - name: Upload Release Assets
-        uses: SierraSoftworks/gh-releases@v1.0.8
+        uses: SierraSoftworks/gh-releases@v1.0.9
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           overwrite: true
