@@ -51,7 +51,7 @@ require (
 	github.com/mdlayher/socket v0.5.0 // indirect
 	github.com/mitchellh/go-ps v1.0.0 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
-	github.com/rs/zerolog v1.35.0
+	github.com/rs/zerolog v1.35.1
 	github.com/safchain/ethtool v0.3.0 // indirect
 	github.com/sierrasoftworks/humane-errors-go v0.0.0-20230530140120-66beb42cef4d
 	github.com/spf13/cobra v1.10.2
