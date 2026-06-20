@@ -7,6 +7,13 @@ particularly useful if you're hosting several services on the same machine and
 want to access them by name instead of needing to remember port numbers.
 
 ## Installation
+Install with [Homebrew](https://brew.sh):
+
+```sh
+brew install sierrasoftworks/tap/tailservice
+```
+
+Or install with `go`:
 
 ```bash
 go install github.com/sierrasoftworks/tailservice@latest
