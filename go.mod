@@ -2,7 +2,7 @@ module github.com/sierrasoftworks/tailservice
 
 go 1.26.5
 
-require github.com/stretchr/testify v1.12.0
+require github.com/stretchr/testify v1.12.1
 
 require (
 	github.com/coder/websocket v1.8.14 // indirect
@@ -12,6 +12,7 @@ require (
 	github.com/huin/goupnp v1.3.0 // indirect
 	github.com/pires/go-proxyproto v0.8.1 // indirect
 	github.com/tailscale/peercred v0.0.0-20250107143737-35a0c7bd7edc // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
 )
 
@@ -57,7 +58,6 @@ require (
 	golang.org/x/time v0.15.0 // indirect
 	golang.zx2c4.com/wintun v0.0.0-20230126152724-0fa3db229ce2 // indirect
 	golang.zx2c4.com/wireguard/windows v0.5.3 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gvisor.dev/gvisor v0.0.0-20260224225140-573d5e7127a8 // indirect
 	tailscale.com v1.102.2
 )
