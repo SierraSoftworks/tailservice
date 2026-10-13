@@ -7,7 +7,7 @@ require (
 	github.com/sierrasoftworks/humane-errors-go v0.0.0-20230530140120-66beb42cef4d
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.12.1
-	tailscale.com v1.104.0
+	tailscale.com v1.104.1
 )
 
 require (
