@@ -1,13 +1,13 @@
 module github.com/sierrasoftworks/tailservice
 
-go 1.27.1
+go 1.27.3
 
 require (
 	github.com/rs/zerolog v1.35.1
 	github.com/sierrasoftworks/humane-errors-go v0.0.0-20230530140120-66beb42cef4d
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.12.1
-	tailscale.com v1.104.1
+	tailscale.com v1.104.2
 )
 
 require (
