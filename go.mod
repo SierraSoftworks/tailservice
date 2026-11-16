@@ -1,13 +1,13 @@
 module github.com/sierrasoftworks/tailservice
 
-go 1.27.3
+go 1.27.4
 
 require (
 	github.com/rs/zerolog v1.35.1
 	github.com/sierrasoftworks/humane-errors-go v0.0.0-20230530140120-66beb42cef4d
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.12.1
-	tailscale.com v1.104.5
+	tailscale.com v1.104.7
 )
 
 require (
@@ -42,7 +42,7 @@ require (
 	github.com/tailscale/hujson v0.0.0-20260727124030-b80ff77dac4f // indirect
 	github.com/tailscale/peercred v0.0.0-20250107143737-35a0c7bd7edc // indirect
 	github.com/tailscale/web-client-prebuilt v0.0.0-20260917222731-e0ed2d0d0fea // indirect
-	github.com/tailscale/wireguard-go v0.0.0-20260928213032-417aef361226 // indirect
+	github.com/tailscale/wireguard-go v0.0.0-20261106233718-9e0ab45c16ca // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	go4.org/mem v0.0.0-20240501181205-ae6ca9944745 // indirect
